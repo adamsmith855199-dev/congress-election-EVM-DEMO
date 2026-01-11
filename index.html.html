@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<title>EVM Panel Demo – प्रभाग 13</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#f1f2f6;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  background:#fff;
+  padding:15px;
+}
+
+/* ===== HEADER ===== */
+.party-header{
+  text-align:center;
+  padding:12px;
+  border-bottom:3px solid #0c2461;
+}
+.party-header h1{
+  margin:0;
+  color:#0c2461;
+  font-size:26px;
+  font-weight:bold;
+}
+.party-header h2{
+  margin:6px 0 0;
+  color:#444;
+  font-size:16px;
+  font-weight:normal;
+}
+
+.note{
+  text-align:center;
+  font-size:13px;
+  color:#555;
+  margin-top:8px;
+}
+
+/* ===== FIXED 2x2 GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:18px;
+  margin-top:20px;
+}
+
+.ward{
+  border:2px solid #333;
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.white{background:#ffffff;}
+.pink{background:#fde2e4;}
+.yellow{background:#fff6cc;}
+.blue{background:#d6e9ff;}
+
+.ward-header{
+  background:#2f3640;
+  color:#fff;
+  padding:8px;
+  text-align:center;
+  font-weight:bold;
+}
+
+table{width:100%;border-collapse:collapse;}
+td,th{border:1px solid #999;padding:6px;font-size:14px;text-align:center;}
+.candidate{text-align:left;}
+
+.vote-btn{
+  background:#1e3799;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+.vote-btn.nota{background:#636e72;}
+.vote-btn.selected{background:#27ae60;}
+.vote-btn:disabled{background:#95a5a6;cursor:not-allowed;}
+
+@keyframes evmGlow{
+  0%{box-shadow:0 0 0 #2ecc71;}
+  50%{box-shadow:0 0 18px #2ecc71;}
+  100%{box-shadow:0 0 6px #2ecc71;}
+}
+.evm-glow{animation:evmGlow 0.8s ease-in-out;}
+
+.footer{
+  margin-top:20px;
+  background:#c0392b;
+  color:#fff;
+  padding:12px;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* ===== MOBILE STACK ===== */
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="party-header">
+  <h1>भारतीय राष्ट्रीय काँग्रेस पक्ष</h1>
+  <h2>भाग क्रमांक 13 – स्थानिक, सुरक्षित, लोकप्रिय उमेदवार</h2>
+</div>
+
+<div class="note">⚠️ ही केवळ प्रचार / डेमो साठी आहे. अधिकृत मतदान नाही.</div>
+
+<div class="grid">
+
+<!-- LEFT COLUMN TOP -->
+<div class="ward white">
+<div class="ward-header">प्रभाग 13 (अ)</div>
+<table>
+<tr><th>क्र.</th><th>उमेदवार</th><th>Vote</th></tr>
+<tr><td>1</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('A',this)">दाबा</button></td></tr>
+<tr><td>2</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('A',this)">दाबा</button></td></tr>
+<tr><td>3</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('A',this)">दाबा</button></td></tr>
+<tr><td>4</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('A',this)">दाबा</button></td></tr>
+<tr><td>5</td><td>NOTA (वरील पैकी कोणतेही नाही)</td><td><button class="vote-btn nota" onclick="selectVote('A',this)">दाबा</button></td></tr>
+</table>
+</div>
+
+<!-- RIGHT COLUMN TOP -->
+<div class="ward yellow">
+<div class="ward-header">प्रभाग 13 (क)</div>
+<table>
+<tr><th>क्र.</th><th>उमेदवार</th><th>Vote</th></tr>
+<tr><td>1</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('C',this)">दाबा</button></td></tr>
+<tr><td>2</td><td>रिटा शैलेश तिवारी <img src="hand.png" width="18"></td><td><button class="vote-btn" onclick="selectVote('C',this)">दाबा</button></td></tr>
+<tr><td>3</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('C',this)">दाबा</button></td></tr>
+<tr><td>4</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('C',this)">दाबा</button></td></tr>
+<tr><td>5</td><td>NOTA (वरील पैकी कोणतेही नाही)</td><td><button class="vote-btn nota" onclick="selectVote('C',this)">दाबा</button></td></tr>
+</table>
+</div>
+
+<!-- LEFT COLUMN BOTTOM -->
+<div class="ward pink">
+<div class="ward-header">प्रभाग 13 (ब)</div>
+<table>
+<tr><th>क्र.</th><th>उमेदवार</th><th>Vote</th></tr>
+<tr><td>1</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('B',this)">दाबा</button></td></tr>
+<tr><td>2</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('B',this)">दाबा</button></td></tr>
+<tr><td>3</td><td>वर्षा योगेश जाधव <img src="hand.png" width="18"></td><td><button class="vote-btn" onclick="selectVote('B',this)">दाबा</button></td></tr>
+<tr><td>4</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('B',this)">दाबा</button></td></tr>
+<tr><td>5</td><td>NOTA (वरील पैकी कोणतेही नाही)</td><td><button class="vote-btn nota" onclick="selectVote('B',this)">दाबा</button></td></tr>
+</table>
+</div>
+
+<!-- RIGHT COLUMN BOTTOM -->
+<div class="ward blue">
+<div class="ward-header">प्रभाग 13 (ड)</div>
+<table>
+<tr><th>क्र.</th><th>उमेदवार</th><th>Vote</th></tr>
+<tr><td>1</td><td>राहुल प्रकाश काटकर <img src="hand.png" width="18"></td><td><button class="vote-btn" onclick="selectVote('D',this)">दाबा</button></td></tr>
+<tr><td>2</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('D',this)">दाबा</button></td></tr>
+<tr><td>3</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('D',this)">दाबा</button></td></tr>
+<tr><td>4</td><td>&nbsp;</td><td><button class="vote-btn" onclick="selectVote('D',this)">दाबा</button></td></tr>
+<tr><td>5</td><td>NOTA (वरील पैकी कोणतेही नाही)</td><td><button class="vote-btn nota" onclick="selectVote('D',this)">दाबा</button></td></tr>
+</table>
+</div>
+
+</div>
+
+<div class="footer">निशाणी – हाताचा पंजा</div>
+</div>
+
+<script>
+let panels={A:false,B:false,C:false,D:false};
+let beep=new Audio("beep.mp3");
+
+function selectVote(panel,btn){
+  if(panels[panel]) return;
+  panels[panel]=true;
+  btn.classList.add("selected");
+  btn.closest("table").querySelectorAll("button").forEach(b=>b.disabled=true);
+
+  if(panels.A && panels.B && panels.C && panels.D){
+    beep.play();
+    document.querySelectorAll(".selected").forEach(b=>b.classList.add("evm-glow"));
+    setTimeout(()=>alert("✅ Voting Completed Successfully"),600);
+  }
+}
+</script>
+
+</body>
+</html>
